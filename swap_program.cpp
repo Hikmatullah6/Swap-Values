@@ -34,7 +34,7 @@ int main()
         cin >> num2;
 
         // Check if user input is valid
-        if (num1 >= 0 && num2 >= 0 && cin.good())
+        if (cin.good())
         {
             // If valid, end loop
             valid = true;
