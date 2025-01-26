@@ -6,7 +6,8 @@ COIS 2040 Assignment 1
 
 // Libraries
 #include <iostream>
-using std::cout, std::cin, std::endl;
+#include <limits>
+using namespace std;
 
 // Swap function
 void swap(int &a, int &b)
@@ -21,21 +22,40 @@ int main()
 {
     // Declare variables
     int num1, num2;
+    bool valid = false; // This variable is for the while loop to check user input
 
-    // Ask user to input the values for the first and second number
-    cout << "Enter the value of the first number: ";
-    cin >> num1;
-    cout << "Enter the value of the second number: ";
-    cin >> num2;
+    // Run while loop until the user input is valid
+    while (!valid)
+    {
+        // Ask user to input the values for the first and second number
+        cout << "Enter the value of the first number: ";
+        cin >> num1;
+        cout << "Enter the value of the second number: ";
+        cin >> num2;
+
+        // Check if user input is valid
+        if (num1 >= 0 && num2 >= 0 && cin.good())
+        {
+            // If valid, end loop
+            valid = true;
+        }
+        else
+        {
+            // Tell the user the input is invalid
+            cout << "Invalid input, please try again.\n";
+            cin.clear();                                         // Reset the buffer's state
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Empty it to avoid infinite loop
+        }
+    }
 
     // Print the numbers before swapping
-    cout << "Before swapping the values: num1 = " << num1 << ", num2 = " << num2 << endl;
+    cout << "\nBefore swapping the values: \nFirst number: " << num1 << "\nSecond number: " << num2 << endl;
 
     // Swap the numbers
     swap(num1, num2);
 
     // Print the numbers after swapping
-    cout << "After swapping the values: num1 = " << num1 << ", num2 = " << num2 << endl;
+    cout << "\nAfter swapping the values: \nFirst number: " << num1 << "\nSecond number: " << num2 << endl;
 
     return 0;
 }
